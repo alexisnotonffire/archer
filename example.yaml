@@ -1,0 +1,49 @@
+title: Example Diagram
+architecture:
+  - name: Network 1
+    onprem: False
+    logical-groups:
+      - name: Logical Group 1
+        onprem: False
+        components:
+          - name: Dataset 1
+            onprem: False
+            resource: gcp.analytics.Bigquery
+
+          - name: Fusion 1
+            onprem: False
+            resource: gcp.analytics.DataFusion
+
+  - name: Network 2
+    onprem: True
+    physical-groups:
+      - name: Physical Group 2
+        onprem: True
+        components:
+          - name: Source 1
+            onprem: True
+            resource: generic.storage.Storage
+          - name: Source 2
+            onprem: True
+            resource: generic.storage.Storage
+
+connections:
+  - from: Source 1
+    to: Fusion 1
+    label: "Daily"
+    color: "red"
+    style: "dashed"
+
+  - from: Source 2
+    to: Fusion 1
+    label: "Weekly"
+    color: "red"
+    style: "dashed"
+
+  - from: Fusion 1
+    to: Dataset 1
+    style: "dotted"
+ 
+
+
+
